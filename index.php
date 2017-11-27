@@ -39,56 +39,40 @@
 		$a = abs($a);
 		switch ($a) {
 			case 0:
-			echo 'ноль';
-			break;
+				echo $a++." ";
 			case 1:
-			echo 'один';
-			break;
+				echo $a++." ";
 			case 2:
-			echo 'два';
-			break;
+				echo $a++." ";
 			case 3:
-			echo 'три';
-			break;
+				echo $a++." ";
 			case 4:
-			echo 'четыре';
-			break;
+				echo $a++." ";
 			case 5:
-			echo 'пять';
-			break;
+				echo $a++." ";
 			case 6:
-			echo 'шесть';
-			break;
+				echo $a++." ";
 			case 7:
-			echo 'семь';
-			break;
+				echo $a++." ";
 			case 8:
-			echo 'восемь';
-			break;
+				echo $a++." ";
 			case 9:
-			echo 'девять';
-			break;
+				echo $a++." ";
 			case 10:
-			echo 'десять';
-			break;
+				echo $a++." ";
 			case 11:
-			echo 'одинадцать';
-			break;
+				echo $a++." ";
 			case 12:
-			echo 'двенадцать';
-			break;
+				echo $a++." ";
 			case 13:
-			echo 'тринадцать';
-			break;
+				echo $a++." ";
 			case 14:
-			echo 'четырнадцать';
-			break;
+				echo $a++." ";
 			case 15:
-			echo 'пятнадцать';
-			break;
+				echo $a;
+				break;
 			default:
-			echo 'не число от 0 до 15';
-			break;
+				echo 'не число от 0 до 15';
 		}
 		?>
 		<hr>
