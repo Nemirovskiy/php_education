@@ -16,9 +16,38 @@ $year = date(Y);
 		<h1><?=$h1;?></h1>
 		
 		<ul id="menu">
-			<li><a href="#">home</a></li>
-			<li><a href="#">archive</a></li>
-			<li><a href="#">contact</a></li>
+			<?
+			$menu= [
+				"home",
+				"archive",
+				"contact"
+			];
+			$menu= [
+				["name"=>"home","href"=>"#","sub_menu"=>[]],
+				["name"=>"archive","href"=>"#","sub_menu"=>[
+					["name"=>"archive №1","href"=>"#"],
+					["name"=>"archive №2","href"=>"#"],
+					["name"=>"archive №3","href"=>"#"],
+				]],
+				["name"=>"contact","href"=>"#","sub_menu"=>[]]
+			];
+			foreach ($menu as $value):?>
+				<?if(!empty($value['sub_menu'])):?>
+					<li class="sub"><a href="<?=$value['href']?>"><?=$value['name']?></a>
+					<ul class="sub_menu">
+						<?foreach($value['sub_menu'] as $sub_val):?>
+						<li>
+							<a href="<?=$sub_val['href']?>"><?=$sub_val['name']?></a>
+						</li>
+						<?endforeach;?>
+					</ul>
+					<?else:?>
+				<li><a href="<?=$value['href']?>"><?=$value['name']?></a>
+				<?endif;?>
+				</li>
+			<?endforeach;
+
+			?>
 		</ul>
 	
 		<div class="post">

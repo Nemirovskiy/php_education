@@ -16,7 +16,10 @@ h3 { font-size: 1.7em; font-weight: normal; margin: 0 0 20px; }
 	#menu li { display: inline; list-style: none; }
 	#menu li a { float: left; margin: 0 0 0 20px; color: #888; }
 		#menu li a:hover { color: #555; }
-
+.sub {position: relative;}
+	.sub_menu {display: none;width: 100px;position: absolute;top: 15px;right: -30px;}
+	.sub a {border-bottom: 1px solid #777;}
+		.sub:hover .sub_menu {display: block;}
 .post { clear: both; padding: 30px 10px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; margin: 0 0 40px; }
 	.post .details { float: left; width: 250px; }
 	.post .details .info { font-size: .9em; color: #999; }
