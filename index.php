@@ -9,14 +9,24 @@
 		margin: auto;
 		font-size: 25px;
 	}
+	li {
+    list-style: none;
+    margin-top: 5px;
+}
 </style>
 </head>
 <body>
 	<ul>
-		<li><a href="PHP_1.php">ДЗ урока 1</a></li>
-		<li><a href="PHP_2.php">ДЗ урока 2</a></li>
-		<li><a href="PHP_3.php">ДЗ урока 3</a></li>
-	</ul>
-
-</body>
-</html>
+		<?
+		$dir = scandir('.');
+		foreach ($dir as $value) {
+			if(stristr($value, ".php") && $value!="index.php"){
+				$file = substr($value, 0,strlen($value)-4);
+				$str .= "<li><a href='$value'>$file</a></li>";
+			}
+		}
+		echo $str;
+		?>
+		</ul>
+	</body>
+	</html>
