@@ -1,4 +1,5 @@
 <?
+///// ----------- функции 
 function create_thumbnail($path, $save, $width, $height) {
 $info = getimagesize($path); //получаем размеры картинки и ее тип
 $size = array($info[0], $info[1]); //закидываем размеры в массив
@@ -52,4 +53,26 @@ function strToUrl($str){
 "У"=>"U", "Ф"=>"F", "Х"=>"KH", "Ц"=>"CZ", "Ч"=>"CH",
 "Ш"=>"SH", "Щ"=>"SH", "Ъ"=>"", "Ы"=>"Y", "Ь"=>"`", "Э"=>"E", "Ю"=>"YU", "Я"=>"YA"];
     return strtr($str, $arr);
+}
+
+/// ------------- основной код ----------------------
+
+$dir = scandir(SMALL);
+// если есть загруженный файл
+if(!empty($_FILES['img']['name'])){
+	//$str = '<div id="info" onclick="info.remove(this)">'; // начало информационного блока
+	$name = strToUrl($_FILES['img']['name']);
+	$tmp = $_FILES['img']['tmp_name'];
+	// проверить на присутствие в каталоге
+	if(in_array($name, $dir)) 
+		$message = 'Ошибка!<br>файл уже есть';
+	// если файла в каталоге нет и это фото - копируем
+	elseif(explode("/",$_FILES['img']['type'])[0] == "image"){
+		create_thumbnail($tmp, SMALL.$name, 250, 250);
+		$isOkCopy = rename($tmp,BIG.$name);
+		if($isOkCopy) $message = 'Скопировано!';
+		else $message = 'Ошибка копирования!';
+	}
+	else $message =  'Ошибка!<br>Загружено не фото!';
+	//$str .= '</div>';// конец информационного блока
 }
