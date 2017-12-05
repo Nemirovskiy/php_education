@@ -20,9 +20,13 @@ require_once "controller/controller.php";
 		<?elseif(!empty($images)):?>
 		<div class="images">
 			<?foreach($images as $item):?>
-				<a href="photo.php?photo=<?=$item?>">
-					<img src="<?=SMALL.$item?>" alt="<?=$title=substr($item, 0,strlen($file)-4)?>" title="<?=$title?>">
-				</a>
+				<div class="item">
+					<a href="photo.php?photo=<?=$item['id']?>">
+						<img src="<?=SMALL.$item['file']?>" alt="<?=$item['name']?>" title="<?=$item['name']?>">
+						<span class="detail"><?=$item['name']?><br>просмотров: <?=$item['count']?></span>
+					</a>
+					<span title="Удалить" onclick="del(<?=$item['id'].",'".$item['name']."'"?>)" class="delete">X</span>
+				</div>
 			<?endforeach;?>
 		</div>	
 		<?else:?>
@@ -34,5 +38,11 @@ require_once "controller/controller.php";
 			<button id="txt" style="display: none;" type="submit"></button>
 		</form>
 	</div>
+	<script>
+		function del(id,name){
+			var res = confirm('Удалить фото '+name);
+			if(res) window.location ="?del="+id;
+		}
+	</script>
 </body>
 </html>

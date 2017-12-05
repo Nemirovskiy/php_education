@@ -6,7 +6,7 @@ require_once "controller/controller.php";
 <html lang="ru">
 <head>
 	<meta charset="UTF-8">
-	<title><?=$name?></title>
+	<title><?=$image['name']?></title>
 	<style>
 	* {	margin: 0;padding: 0;text-align: center;}
 	body {overflow: hidden;}
@@ -15,10 +15,10 @@ require_once "controller/controller.php";
 </style>
 </head>
 <body>
-<?if(empty($file)):?>
+<?if(empty($image['name'])):?>
 	<h1>Вы зашли не с той стороны<br>попробуйте зайти<br><a href=".">сюда</a></h1>
 <?else:?>
-	<img src="<?=BIG.$file?>" alt="$name">
+	<img src="<?=BIG.$image['file']?>" alt="<?=$image['name']?>">
 	<a class="close" href=".">X</a>
 <?endif;?>
 </body>

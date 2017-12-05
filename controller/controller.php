@@ -14,6 +14,12 @@ elseif(!empty($_GET['photo'])){
 	include "models/photo.php";
 }
 
+/// если есть параметр в адресной строке del
+
+elseif(!empty($_GET['del'])){
+	include "models/del.php";
+}
+
 /// если нет загруженного файла и нет параметра в адресной строке подключить galery
 
 else{
