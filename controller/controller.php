@@ -6,12 +6,16 @@ require_once "config.php";
 
 if(!empty($_FILES['img']['name'])){
 	include "models/file.php";
+
 }
 
 /// если есть параметр в адресной строке photo
 
 elseif(!empty($_GET['photo'])){
+	if(!empty($_POST['name'])&&!empty($_POST['text']))
+		include "models/feedback.php";
 	include "models/photo.php";
+	
 }
 
 /// если есть параметр в адресной строке del
