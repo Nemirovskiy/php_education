@@ -6,10 +6,11 @@ require_once "controller/controller.php";
 <html lang="ru">
 <head>
 	<meta charset="UTF-8">
-	<title><?=$item['name']?></title>
+	<title><?=$item['name']?> подробно</title>
 		<link rel="stylesheet" href="style/style.css">
 </head>
 <body>
+	<?include "nav.php";?>
 	<main>
 	<?if(empty($item['id'])):?>
 		<h1>Вы зашли не с той стороны<br>попробуйте зайти<br><a href=".">на главную</a></h1>

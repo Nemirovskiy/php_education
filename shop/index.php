@@ -11,9 +11,9 @@ require_once "controller/controller.php";
 	<link rel="stylesheet" href="style/style.css">
 </head>
 <body>
+	<?include "nav.php";?>
 <main>
-	<?//print_r($product);
-	foreach ($product as $item):?>
+	<?foreach ($product as $item):?>
 	<div class="item">
 		<img src="images/small/<?=$item['image']?>" alt="<?=$item['name']?>">
 		<h2><a href="detail.php?id=<?=$item['id']?>"><?=$item['name']?></a></h2>
@@ -21,16 +21,14 @@ require_once "controller/controller.php";
 		<p><?=$item['text']?></p>
 	
 	
-		<!--div class="crud">
-			<a href="#">create</a>
-			<a href="#">edit</a>
-			<a href="#">update</a>
-			<a href="#">delite</a>
-		</div-->
+		<div class="crud">
+			<a href="crud.php?crud=create">create</a>
+			<a href="crud.php?crud=update&crudid=<?=$item['id']?>">update</a>
+			<a href="crud.php?crud=delite&crudid=<?=$item['id']?>">delite</a>
+		</div>
 		<a href="basket.php?tobasket=<?=$item['id']?>">В корзину</a>
 	</div>
 	<?endforeach;?>
 </main>
-
 </body>
 </html>

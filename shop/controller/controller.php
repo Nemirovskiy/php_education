@@ -18,15 +18,19 @@ elseif(substr(pathinfo($_SERVER['SCRIPT_NAME'])['basename'],0,-4) =='basket')
 {
 	include "models/basket.php";
 }
+elseif(substr(pathinfo($_SERVER['SCRIPT_NAME'])['basename'],0,-4) =='crud')
+{
+	include "models/function.php";
+}
 
 /// если есть параметр в адресной строке photo
 
-elseif(!empty($_GET['crud'])&&$_GET['crud']=='create'){
+/*elseif(!empty($_GET['crud'])&&$_GET['crud']=='create'){
 	if(!empty($_POST['name'])&&!empty($_POST['text']))
 		include "models/feedback.php";
 	include "models/photo.php";
 	
-}
+}*/
 
 /// если есть параметр в адресной строке del
 
