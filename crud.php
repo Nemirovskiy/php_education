@@ -1,6 +1,6 @@
 <?
 // подключаем контроллер
-require_once "controller/controller.php";
+require_once "models/function.php";
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -12,11 +12,7 @@ require_once "controller/controller.php";
 </head>
 <body>
 <main>
-	<?//print_r($_GET);
-	?>
-	
-	<?echo doFeedbackAction($_GET['crud'],$_GET['crudid']);?>
-
+	<?echo doFeedbackAction();?>
 </main>
 
 </body>

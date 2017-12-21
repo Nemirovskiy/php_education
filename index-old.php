@@ -1,4 +1,5 @@
 <?
+session_start();
 // подключаем контроллер
 require_once "controller/controller.php";
 ?>
@@ -9,11 +10,30 @@ require_once "controller/controller.php";
 	<meta charset="UTF-8">
 	<title>PHP ДЗ 5 каталог товаров</title>
 	<link rel="stylesheet" href="style/style.css">
+	<script src="jquery.js"></script>
+	<script>
+		function basket(act,id){
+			var str = act+"="+id;
+			$.ajax({
+				type: "POST",
+				url: "",
+				data: str 
+			}).done(function( msg ) {
+				$("#mess").html(msg);
+				$("#btn-"+id).html('В корзине');
+			});
+		}
+	</script>
 </head>
 <body>
-	<?include "nav.php";?>
+	<header>
+		<?include "nav.php";?>
+	</header>
+	<span id="mess"></span>
 <main>
-	<?foreach ($product as $item):?>
+	<?
+	echo $message;
+	foreach ($product as $item):?>
 	<div class="item">
 		<img src="images/small/<?=$item['image']?>" alt="<?=$item['name']?>">
 		<h2><a href="detail.php?id=<?=$item['id']?>"><?=$item['name']?></a></h2>
@@ -26,7 +46,7 @@ require_once "controller/controller.php";
 			<a href="crud.php?crud=update&crudid=<?=$item['id']?>">update</a>
 			<a href="crud.php?crud=delite&crudid=<?=$item['id']?>">delite</a>
 		</div>
-		<a href="basket.php?tobasket=<?=$item['id']?>">В корзину</a>
+		<a id="btn-<?=$item['id']?>" onclick="basket('add','<?=$item['id']?>')"><?=$item['link']?></a>
 	</div>
 	<?endforeach;?>
 </main>

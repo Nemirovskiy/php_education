@@ -1,48 +1,71 @@
 <?
-// подключаем контроллер
-require_once "controller/controller.php";
+session_start();
+/// подключаем настройки
+include "controller/config.php";
+// подключаем функции
+include "models/function.php";
+
+/// первым делом проверяем есть ли пост,
+//  если есть обработаем его 
+if(!empty($_POST)){
+	// обработка поста функциями
+	// обработка корзины
+	$basketMess = ajaxBasket();
+	// Обработка авторизации пользователя
+	$loginMess = userAuth();
+}
+// подключаем авторизацию пользователя
+if(empty($loginMess)) $loginMess = userAuth();
+if(isset($_SESSION['login'])) $menu = '<li><a href="?user">Кабинет</a></li>';
+if($_SESSION['resol']==1) $menu .= '<li><a href="?admin">Админ</a></li>';
+// ---- выводим на экран информацию ---
+// если есть вывод ajax покажем его
+if(!empty($basketMess)){
+	echo $basketMess;
+}
+// если нет GET параметров - главная
+elseif(empty($_GET)||isset($_GET['out'])){
+	$title="Главная";
+	$products = getBasket();
+	$content = "views/index.php";
+	include "views/main.php";
+}
+// если GET детальная
+elseif(!empty($_GET['detail'])){
+	$title="Детально";
+	include "models/detail.php";
+	$content = "views/detail.php";
+	include "views/main.php";
+}
+elseif(isset($_GET['basket'])){
+	$title="Корзина";
+	include "models/basket.php";
+	$content =  "views/basket.php";
+	include "views/main.php";
+}
+elseif(isset($_GET['user'])&&isset($_SESSION['login'])){
+	// покажем кабинет только если есть логин
+		$title="Кабинет";
+		$content =  "views/user.php";
+		include "views/main.php";
+}
+elseif(isset($_GET['admin'])&&$_SESSION['resol']==1){
+	// покажем кабинет только если админ
+		$title="Кабинет админа";
+		$products = getBasket();
+		$content =  "views/admin.php";
+		include "views/main.php";
+}
+elseif(isset($_GET['crud'])&&$_SESSION['resol']==1){
+	// покажем кабинет только если админ
+		//$title="Кабинет админа";
+		$mess = doFeedbackAction();;
+		//$content =  "views/crud.php";
+		include "views/crud.php";
+}
+else{
+		// иначе перебросим на главную
+		header("location: .");
+	}
+
 ?>
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta charset="UTF-8">
-	<title>PHP ДЗ 4</title>
-	<link rel="stylesheet" href="style/style.css">
-</head>
-<body>
-	<div class="container">
-		<?if(!empty($message)):?>
-			<span class="info">
-				<p><?=$message?></p>
-				<a class="btn" href=".">Вернуться</a>
-			</span><br>
-		<?elseif(!empty($images)):?>
-		<div class="images">
-			<?foreach($images as $item):?>
-				<div class="item">
-					<a href="photo.php?photo=<?=$item['id']?>">
-						<img src="<?=SMALL.$item['file']?>" alt="<?=$item['name']?>" title="<?=$item['name']?>">
-						<span class="detail"><?=$item['name']?><br>просмотров: <?=$item['count']?></span>
-					</a>
-					<span title="Удалить" onclick="del(<?=$item['id'].",'".$item['name']."'"?>)" class="delete">X</span>
-				</div>
-			<?endforeach;?>
-		</div>	
-		<?else:?>
-			<h1>Вы ещё не загрузили фото</h1>
-		<?endif;?>
-		<form enctype="multipart/form-data" method="POST">
-			<label for="infile">Выбрать файл</label>
-			<input style="display: none" type="file" onchange="txt.innerHTML='Загрузить<br>'+this.files[0].name;txt.style.display = 'block'" id="infile" name="img">
-			<button id="txt" style="display: none;" type="submit"></button>
-		</form>
-	</div>
-	<script>
-		function del(id,name){
-			var res = confirm('Удалить фото '+name);
-			if(res) window.location ="?del="+id;
-		}
-	</script>
-</body>
-</html>
