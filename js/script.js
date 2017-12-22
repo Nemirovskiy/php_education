@@ -18,11 +18,11 @@ function basket(act,id){
 		data: str 
 	}).done(function( msg ) {
 		$("#mess").html(msg);
-		var count = parseInt($("#prod_count_"+id)[0].innerHTML);
+		var count = parseInt($("#prod_count_"+id).val());
 		if(act=='add') count++;
 		else if(act=='min'&&count>1) count--;
 		else $("#prod_item_"+id).html('');
-		$("#prod_count_"+id).html(count);
+		$("#prod_count_"+id).val(count);
 	});
 }
 

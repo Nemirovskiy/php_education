@@ -16,7 +16,7 @@
 			<td>
 				<a href="?detail=<?=$key?>"><?=$item['name']?></a>
 			</td>
-			<td><span id='prod_count_<?=$key?>'><?=$item['count']?></span><br>
+			<td><input type="number" name="count[<?=$key?>]" id='prod_count_<?=$key?>' value="<?=$item['count']?>"><br>
 				<a onclick="basket('add','<?=$key?>')"> + </a>
 				<a onclick="basket('min','<?=$key?>')"> - </a>
 			</td>

@@ -40,13 +40,14 @@ elseif(!empty($_GET['detail'])){
 elseif(isset($_GET['basket'])){
 	$title="Корзина";
 	include "models/basket.php";
+	$arr_basket = cookieBascket();
 	$content =  "views/basket.php";
 	include "views/main.php";
 }
 elseif(isset($_GET['user'])&&isset($_SESSION['login'])){
 	// покажем кабинет только если есть логин
 		$title="Кабинет";
-		$content =  "views/user.php";
+		$content = "views/user.php";
 		include "views/main.php";
 }
 elseif(isset($_GET['admin'])&&$_SESSION['resol']==1){
